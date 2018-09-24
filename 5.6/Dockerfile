@@ -1,4 +1,4 @@
-FROM php:7.2-fpm
+FROM php:5.6-fpm
 
 ADD https://github.com/inforent/ir-php-fpm/raw/master/files-to-add.tgz /tmp/
 RUN cd /tmp &&  tar xzf /tmp/files-to-add.tgz && rm /tmp/files-to-add.tgz && \
@@ -12,6 +12,7 @@ RUN cd /tmp &&  tar xzf /tmp/files-to-add.tgz && rm /tmp/files-to-add.tgz && \
        libldap2-dev \
        libgeoip-dev \
     && docker-php-ext-install gd \
+    && docker-php-ext-configure ldap --with-libdir=lib/x86_64-linux-gnu \
     && docker-php-ext-install ldap \
     && docker-php-ext-install gettext \
     && docker-php-ext-install opcache \
@@ -21,9 +22,9 @@ RUN cd /tmp &&  tar xzf /tmp/files-to-add.tgz && rm /tmp/files-to-add.tgz && \
     && alien -i /tmp/oracle-instantclient*basic*.rpm \
     && alien -i /tmp/oracle-instantclient*devel*.rpm \
     && alien -i /tmp/oracle-instantclient*sqlplus*.rpm \
-    && pecl install apcu \
+    && pecl install apcu-4.0.11 \
     && pecl install redis \
-    && pecl install oci8 \
+    && pecl install oci8-2.0.12  \
     && pecl install geoip-1.1.1 
 
 RUN rm -f /tmp/ora*.rpm

@@ -12,6 +12,7 @@ RUN cd /tmp &&  tar xzf /tmp/files-to-add.tgz && rm /tmp/files-to-add.tgz && \
        libldap2-dev \
        libgeoip-dev \
     && docker-php-ext-install gd \
+    && docker-php-ext-configure ldap --with-libdir=lib/x86_64-linux-gnu \
     && docker-php-ext-install ldap \
     && docker-php-ext-install gettext \
     && docker-php-ext-install opcache \
