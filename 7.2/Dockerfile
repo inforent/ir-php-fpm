@@ -1,0 +1,24 @@
+FROM php:7.2-fpm
+
+ADD ../oracle-instantclient*.rpm /tmp/
+RUN apt-get update && apt-get install  -y \
+       libfreetype6-dev  \
+       libjpeg62-turbo-dev \
+       libpng-dev \
+       alien \
+       libldap2-dev \
+       libgeoip-dev \
+    && docker-php-ext-install gd \
+    && docker-php-ext-install ldap \
+    && docker-php-ext-install gettext \
+    && docker-php-ext-install opcache \
+    && alien -i /tmp/oracle-instantclient*basic*.rpm \
+    && alien -i /tmp/oracle-instantclient*devel*.rpm \
+    && alien -i /tmp/oracle-instantclient*sqlplus*.rpm \
+    && pecl install apcu \
+    && pecl install redis \
+    && pecl install oci8 \
+    && pecl install geoip-1.1.1 
+
+
+RUN rm -f /tmp/oracle-instantclient*.rpm
