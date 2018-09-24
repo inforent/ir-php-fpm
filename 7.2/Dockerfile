@@ -2,6 +2,8 @@ FROM php:7.2-fpm
 
 ADD https://github.com/inforent/ir-php-fpm/raw/master/files-to-add.tgz /tmp/
 RUN cd /tmp &&  tar xzf /tmp/files-to-add.tgz && rm /tmp/files-to-add.tgz && \
+    mkdir  /usr/local/etc/php-fpm.d/inforent.d/ && \
+    echo "include=etc/php-fpm.d/inforent.d/*.conf" > /usr/local/etc/php-fpm.d/inforent.conf && \
     apt-get update && apt-get install  -y \
        libfreetype6-dev  \
        libjpeg62-turbo-dev \
