@@ -11,6 +11,8 @@ RUN cd /tmp &&  tar xzf /tmp/files-to-add.tgz && rm /tmp/files-to-add.tgz && \
        alien \
        libldap2-dev \
        libgeoip-dev \
+       libxslt1-dev \
+       libbz2-dev \
     && docker-php-ext-install gd \
     && docker-php-ext-configure ldap --with-libdir=lib/x86_64-linux-gnu \
     && docker-php-ext-install ldap \
@@ -19,6 +21,7 @@ RUN cd /tmp &&  tar xzf /tmp/files-to-add.tgz && rm /tmp/files-to-add.tgz && \
     && docker-php-ext-install mysqli \
     && docker-php-ext-install pdo_mysql \
     && docker-php-ext-install bz2 \
+    && docker-php-ext-install xsl \
     && alien -i /tmp/oracle-instantclient*basic*.rpm \
     && alien -i /tmp/oracle-instantclient*devel*.rpm \
     && alien -i /tmp/oracle-instantclient*sqlplus*.rpm \
