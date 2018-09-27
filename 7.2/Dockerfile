@@ -13,6 +13,7 @@ RUN cd /tmp &&  tar xzf /tmp/files-to-add.tgz && rm /tmp/files-to-add.tgz && \
        libgeoip-dev \
        libxslt1-dev \
        libbz2-dev \
+       msmtp \
     && docker-php-ext-install gd \
     && docker-php-ext-install ldap \
     && docker-php-ext-install gettext \
