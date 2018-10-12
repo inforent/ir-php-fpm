@@ -24,6 +24,7 @@ RUN cd /tmp &&  tar xzf /tmp/files-to-add.tgz && rm /tmp/files-to-add.tgz && \
     && docker-php-ext-install pdo_mysql \
     && docker-php-ext-install bz2 \
     && docker-php-ext-install xsl \
+    && docker-php-ext-install mysql \
     && alien -i /tmp/oracle-instantclient*basic*.rpm \
     && alien -i /tmp/oracle-instantclient*devel*.rpm \
     && alien -i /tmp/oracle-instantclient*sqlplus*.rpm \
