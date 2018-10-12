@@ -14,6 +14,7 @@ RUN cd /tmp &&  tar xzf /tmp/files-to-add.tgz && rm /tmp/files-to-add.tgz && \
        libxslt1-dev \
        libbz2-dev \
        msmtp \
+       libaio1 \
     && docker-php-ext-install gd \
     && docker-php-ext-configure ldap --with-libdir=lib/x86_64-linux-gnu \
     && docker-php-ext-install ldap \
@@ -30,5 +31,7 @@ RUN cd /tmp &&  tar xzf /tmp/files-to-add.tgz && rm /tmp/files-to-add.tgz && \
     && pecl install redis \
     && pecl install oci8 \
     && pecl install geoip-1.1.1 
+
+ENV LD_LIBRARY_PATH /usr/lib/oracle/12.2/client64/lib
 
 RUN rm -f /tmp/ora*.rpm
