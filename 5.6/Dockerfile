@@ -15,6 +15,10 @@ RUN cd /tmp &&  tar xzf /tmp/files-to-add.tgz && rm /tmp/files-to-add.tgz && \
        libbz2-dev \
        msmtp  \
        libaio1 \
+    && docker-php-ext-configure  gd --with-gd \
+                                    --with-jpeg-dir \
+                                    --with-freetype-dir \
+                                    --enable-gd-native-ttf \
     && docker-php-ext-install gd \
     && docker-php-ext-configure ldap --with-libdir=lib/x86_64-linux-gnu \
     && docker-php-ext-install ldap \
