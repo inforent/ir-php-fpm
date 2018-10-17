@@ -1,20 +1,16 @@
 FROM php:5.6-fpm
 
-ADD https://github.com/inforent/ir-php-fpm/raw/master/files-to-add.tgz /tmp/
-RUN cd /tmp &&  tar xzf /tmp/files-to-add.tgz && rm /tmp/files-to-add.tgz && \
-    mkdir  /usr/local/etc/php-fpm.d/inforent.d/ && \
+RUN mkdir  /usr/local/etc/php-fpm.d/inforent.d/ && \
     echo "include=etc/php-fpm.d/inforent.d/*.conf" > /usr/local/etc/php-fpm.d/inforent.conf && \
     apt-get update && apt-get install  -y \
        libfreetype6-dev  \
        libjpeg62-turbo-dev \
        libpng-dev \
-       alien \
        libldap2-dev \
        libgeoip-dev \
        libxslt1-dev \
        libbz2-dev \
        msmtp  \
-       libaio1 \
     && docker-php-ext-configure  gd --with-gd \
                                     --with-jpeg-dir \
                                     --with-freetype-dir \
@@ -29,14 +25,7 @@ RUN cd /tmp &&  tar xzf /tmp/files-to-add.tgz && rm /tmp/files-to-add.tgz && \
     && docker-php-ext-install bz2 \
     && docker-php-ext-install xsl \
     && docker-php-ext-install mysql \
-    && alien -i /tmp/oracle-instantclient*basic*.rpm \
-    && alien -i /tmp/oracle-instantclient*devel*.rpm \
-    && alien -i /tmp/oracle-instantclient*sqlplus*.rpm \
     && pecl install apcu-4.0.11 \
     && pecl install redis \
-    && pecl install oci8-2.0.12  \
     && pecl install geoip-1.1.1 
 
-ENV LD_LIBRARY_PATH /usr/lib/oracle/12.2/client64/lib
-
-RUN rm -f /tmp/ora*.rpm
