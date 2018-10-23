@@ -1,8 +1,19 @@
 FROM php:5.6-fpm
 
-RUN mkdir  /usr/local/etc/php-fpm.d/inforent.d/ && \
-    echo "include=etc/php-fpm.d/inforent.d/*.conf" > /usr/local/etc/php-fpm.d/inforent.conf && \
-    apt-get update && apt-get install  -y \
+RUN    rm /usr/local/etc/php-fpm.d/*docker* \
+    && rm /usr/local/etc/php-fpm.d/www.conf \
+    && mkdir  /usr/local/etc/php-fpm.d/inforent.d/ \
+    && echo  "[global]\n\
+daemonize = no\n\
+error_log = /proc/self/fd/2\n\
+;for each pool please add\n\
+;access.log = /proc/self/fd/2\n\
+;catch_workers_output = yes\n\
+;place pools unter mapped volume /usr/local/etc/php-fpm.d/inforent.d/\n\
+include=etc/php-fpm.d/inforent.d/*.conf\n\
+" >/usr/local/etc/php-fpm.d/inforent.conf
+
+RUN apt-get update && apt-get install  -y \
        libfreetype6-dev  \
        libjpeg62-turbo-dev \
        libpng-dev \
