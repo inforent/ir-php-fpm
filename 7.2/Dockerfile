@@ -22,6 +22,19 @@ RUN apt-get update && apt-get install  -y \
        libxslt1-dev \
        libbz2-dev \
        msmtp \
+       locales \
+    && echo "\n\
+de_DE ISO-8859-1\n\
+de_DE.UTF-8 UTF-8\n\
+de_DE@euro ISO-8859-15\n\
+en_GB ISO-8859-1\n\
+en_GB.ISO-8859-15 ISO-8859-15\n\
+en_GB.UTF-8 UTF-8\n\
+en_US ISO-8859-1\n\
+en_US.ISO-8859-15 ISO-8859-15\n\
+en_US.UTF-8 UTF-8\n\
+" >> /etc/locale.gen \
+    && dpkg-reconfigure --frontend=noninteractive locales \
     && docker-php-ext-configure  gd --with-gd \
                                     --with-jpeg-dir \
                                     --with-freetype-dir \
@@ -34,6 +47,9 @@ RUN apt-get update && apt-get install  -y \
     && docker-php-ext-install pdo_mysql \
     && docker-php-ext-install bz2 \
     && docker-php-ext-install xsl \
+    && docker-php-ext-install soap \
+    && docker-php-ext-install zip \
+    && docker-php-ext-install intl \
     && pecl install apcu \
     && pecl install redis \
     && pecl install geoip-1.1.1 
