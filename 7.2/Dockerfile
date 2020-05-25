@@ -38,7 +38,6 @@ en_US.UTF-8 UTF-8\n\
     && docker-php-ext-configure  gd --with-gd \
                                     --with-jpeg-dir \
                                     --with-freetype-dir \
-                                    --enable-gd-native-ttf \
     && docker-php-ext-install gd \
     && docker-php-ext-install ldap \
     && docker-php-ext-install gettext \
