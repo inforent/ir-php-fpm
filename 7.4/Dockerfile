@@ -37,7 +37,7 @@ en_US.UTF-8 UTF-8\n\
 " >> /etc/locale.gen \
     && dpkg-reconfigure --frontend=noninteractive locales
 
-RUN docker-php-ext-configure  gd --with-gd \
+RUN docker-php-ext-configure  gd \
                                  --with-jpeg-dir \
                                  --with-freetype-dir                                 
 RUN docker-php-ext-install gd
