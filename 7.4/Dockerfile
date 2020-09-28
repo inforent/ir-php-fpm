@@ -38,8 +38,8 @@ en_US.UTF-8 UTF-8\n\
     && dpkg-reconfigure --frontend=noninteractive locales
 
 RUN docker-php-ext-configure  gd \
-                                 --with-jpeg-dir \
-                                 --with-freetype-dir                                 
+                                 --with-jpeg \
+                                 --with-freetype                                 
 RUN docker-php-ext-install gd
 RUN docker-php-ext-install ldap
 RUN docker-php-ext-install gettext
